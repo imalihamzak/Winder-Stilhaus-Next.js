@@ -1,0 +1,89 @@
+"use client";
+
+import FadeIn from "@/components/FadeIn";
+import { Award, Users, Wrench, Shield, CheckCircle, LucideIcon } from "lucide-react";
+
+interface Feature {
+  icon: LucideIcon;
+  title: string;
+  desc: string;
+}
+
+const features: Feature[] = [
+  {
+    icon: Award,
+    title: "Award-Winning Design Team",
+    desc: "Recognized by industry leaders for excellence in design and execution.",
+  },
+  {
+    icon: Users,
+    title: "Certified Industry Specialists",
+    desc: "Our team holds certifications from leading design institutions worldwide.",
+  },
+  {
+    icon: Wrench,
+    title: "Premium Material Sourcing",
+    desc: "Direct partnerships with top-tier suppliers for authentic luxury materials.",
+  },
+  {
+    icon: Shield,
+    title: "Dedicated Project Managers",
+    desc: "Every project has a dedicated manager ensuring seamless execution.",
+  },
+  {
+    icon: CheckCircle,
+    title: "Quality Guarantee",
+    desc: "Comprehensive warranty on all workmanship and materials.",
+  },
+  {
+    icon: Award,
+    title: "Timeline Commitment",
+    desc: "We deliver on time, every time, with transparent progress tracking.",
+  },
+];
+
+export default function WhyChooseUs() {
+  return (
+    <section className="bg-[#1D1D1D] text-white border-t border-[#4A4A4A]">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-12 md:py-16 lg:py-20">
+        <FadeIn direction="up" delay={0.2} duration={0.6}>
+            <div className="text-center mb-12 md:mb-16 lg:mb-20">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FFFFFF] border border-[#CED3D7] text-sm font-medium text-[#1D1D1D] mb-6 font-dm-sans" style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1rem)', fontWeight: 400, lineHeight: '1.2', letterSpacing: '0px', fontFamily: 'DM Sans, sans-serif' }}>
+              <span className="h-2 w-2 rounded-full" style={{ backgroundColor: '#F04E22' }}></span>
+          Why Choose Us
+            </div>
+            <h2 className="text-white font-noto-serif mt-6" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 600, lineHeight: '1.5', letterSpacing: '0px', fontFamily: 'Noto Serif, serif', color: '#FFFFFF' }}>
+              What Sets Us Apart
+            </h2>
+            <p className="text-white/90 max-w-2xl mx-auto font-dm-sans lead mt-6" style={{ fontSize: 'clamp(1.125rem, 1.5vw, 1.25rem)', fontWeight: 400, lineHeight: '1.625', letterSpacing: '0px', fontFamily: 'DM Sans, sans-serif', color: 'rgba(255, 255, 255, 0.9)' }}>
+              Experience the difference that comes from a decade of excellence, 
+              innovation, and unwavering commitment to quality.
+            </p>
+          </div>
+        </FadeIn>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {features.map((feature, i) => {
+            const Icon = feature.icon;
+            return (
+              <FadeIn key={i} direction="up" delay={0.3 + (i * 0.1)} duration={0.6}>
+                <div className="bg-white border border-[#4A4A4A] p-6 rounded-[24px] hover:shadow-[0_18px_45px_rgba(0,0,0,0.1)] transition-all">
+                  <div className="w-12 h-12 rounded-full ws-double-ring ws-double-ring--tight bg-[#214B57]/10 flex items-center justify-center mb-4">
+                    <Icon className="text-xl text-[#214B57]" />
+                  </div>
+                  <h4 className="font-semibold text-[#1D1D1D] mb-2 font-noto-serif" style={{ fontSize: 'clamp(1.125rem, 1.5vw, 1.25rem)', fontWeight: 500, lineHeight: '1.5', letterSpacing: '0px', fontFamily: 'Noto Serif, serif', color: '#1D1D1D' }}>
+                    {feature.title}
+                  </h4>
+                  <p className="text-sm text-[#7F8C8D] font-dm-sans" style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1rem)', fontWeight: 400, lineHeight: '1.625', letterSpacing: '0px', fontFamily: 'DM Sans, sans-serif', color: '#7F8C8D' }}>
+                    {feature.desc}
+                  </p>
+                </div>
+              </FadeIn>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+

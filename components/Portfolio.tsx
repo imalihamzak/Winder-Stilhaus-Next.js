@@ -1,0 +1,142 @@
+"use client";
+import { useState } from "react";
+import FadeIn from "@/components/FadeIn";
+import { MapPin } from "lucide-react";
+
+interface Project {
+  id: number;
+  title: string;
+  location: string;
+  type: string;
+  image: string;
+}
+
+const filters: string[] = ["All", "Living Rooms", "Bedrooms", "Kitchens", "Offices", "Villas"];
+
+const projects: Project[] = [
+  {
+    id: 1,
+    title: "Modern Luxury Living",
+    location: "DHA Lahore",
+    type: "Living Rooms",
+    image: "/assets/portfolio/kitchen.png",
+  },
+  {
+    id: 2,
+    title: "Minimal Bedroom Suite",
+    location: "Gulberg",
+    type: "Bedrooms",
+    image: "/assets/portfolio/bedroom.png",
+  },
+  {
+    id: 3,
+    title: "Contemporary Kitchen",
+    location: "Bahria Town",
+    type: "Kitchens",
+    image: "/img-1.png",
+  },
+  {
+    id: 4,
+    title: "Executive Office",
+    location: "Blue Area",
+    type: "Offices",
+    image: "/assets/portfolio/bedroom.png",
+  },
+  {
+    id: 5,
+    title: "Luxury Villa Interior",
+    location: "DHA Phase 6",
+    type: "Villas",
+    image: "/img-1.png",
+  },
+];
+
+export default function PortfolioPage() {
+  const [activeFilter, setActiveFilter] = useState<string>("All");
+
+  const filteredProjects =
+    activeFilter === "All"
+      ? projects
+      : projects.filter((p) => p.type === activeFilter);
+
+  return (
+    <section className="bg-[#1D1D1D] text-white">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 pt-12 md:pt-16 lg:pt-20 pb-12 md:pb-16 lg:pb-20">
+      {/* Heading */}
+        <FadeIn direction="up" delay={0.1} duration={0.6}>
+      <div className="text-center mb-12 md:mb-16 lg:mb-20">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-sm font-medium text-white mb-6 font-dm-sans" style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1rem)', fontWeight: 400, lineHeight: '1.2', letterSpacing: '0px', fontFamily: 'DM Sans, sans-serif' }}>
+              <span className="h-2 w-2 rounded-full" style={{ backgroundColor: '#F04E22' }}></span>
+              Portfolio
+            </div>
+            <h2 className="text-white font-noto-serif mt-6" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 600, lineHeight: '1.5', letterSpacing: '0px', fontFamily: 'Noto Serif, serif' }}>
+          Our Portfolio
+        </h2>
+            <p className="text-white/90 max-w-2xl mx-auto font-dm-sans lead mt-6" style={{ fontSize: 'clamp(1.125rem, 1.5vw, 1.25rem)', fontWeight: 400, lineHeight: '1.625', letterSpacing: '0px', fontFamily: 'DM Sans, sans-serif' }}>
+          Explore our curated collection of luxury interior projects crafted with precision and elegance.
+        </p>
+      </div>
+        </FadeIn>
+
+      {/* Filter Bar */}
+        <FadeIn direction="up" delay={0.15} duration={0.6}>
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12 md:mb-16">
+        {filters.map((filter) => (
+          <button
+            key={filter}
+            onClick={() => setActiveFilter(filter)}
+                className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full border text-xs sm:text-sm font-medium transition
+              ${
+                activeFilter === filter
+                      ? "bg-[#214B57] text-white border-[#214B57]"
+                      : "border-[#4A4A4A] text-white/70 hover:bg-white/10 hover:border-[#214B57]/30"
+              }`}
+          >
+            {filter}
+          </button>
+        ))}
+      </div>
+        </FadeIn>
+
+      {/* Project Grid */}
+          <div
+          key={activeFilter}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
+          >
+          {filteredProjects.map((project, index) => (
+            <FadeIn key={project.id} direction="up" delay={0.1 + index * 0.1} duration={0.6}>
+              <div className="bg-white border border-[#4A4A4A] rounded-xl sm:rounded-2xl overflow-hidden hover:shadow-sm transition-shadow">
+                <div className="relative overflow-hidden h-48 sm:h-56">
+            <img
+              src={project.image}
+              alt={project.title}
+                    className="w-full h-full object-cover"
+            />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                </div>
+            <div className="p-4 sm:p-6">
+                  <h3 className="font-semibold text-[#1D1D1D] mb-2 font-noto-serif" style={{ fontSize: 'clamp(1rem, 1.5vw, 1.5rem)', fontWeight: 400, lineHeight: '1.2', letterSpacing: '0px', fontFamily: 'Noto Serif, serif' }}>
+                {project.title}
+              </h3>
+                  <p className="text-[#7F8C8D] text-xs sm:text-sm mb-1 font-dm-sans">
+                <MapPin size={14} className="inline" /> {project.location}
+              </p>
+                  <p className="text-[#7F8C8D] text-xs sm:text-sm mb-4 sm:mb-5 font-dm-sans">
+                Property Type: {project.type}
+              </p>
+              <a
+                    href={`/project`}
+                    className="inline-flex items-center gap-2 text-[#214B57] font-medium hover:gap-3 transition-all font-dm-sans"
+              >
+                View Project →
+              </a>
+            </div>
+          </div>
+            </FadeIn>
+        ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
