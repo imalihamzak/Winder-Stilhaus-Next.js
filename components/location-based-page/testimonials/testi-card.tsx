@@ -1,21 +1,21 @@
 "use client";
 
-import StarRating from "./star-rating";
-
 interface StarsProps {
   rating?: number;
 }
 
 function Stars({ rating = 5 }: StarsProps) {
   return (
-    <div className="flex items-center justify-center gap-1">
+    <div className="flex items-center justify-center gap-0.5">
       {Array.from({ length: 5 }).map((_, i) => (
-        <span
+        <svg
           key={i}
-          className={i < rating ? "text-[#F04E22]" : "text-[#4A4A4A]/20"}
+          className={`w-4 h-4 ${i < rating ? "text-[#F04E22]" : "text-[#E0E0E0]"}`}
+          fill="currentColor"
+          viewBox="0 0 20 20"
         >
-          ★
-        </span>
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
       ))}
     </div>
   );
@@ -34,39 +34,46 @@ interface TestimonialCardProps {
   data: TestimonialData;
 }
 
-export default function TestimonialCard({ data }: TestimonialCardProps) {
+function TestimonialCard({ data }: TestimonialCardProps) {
   return (
     <div className="text-center w-full max-w-xl mx-auto">
-      <div>
-      {data.img ? (
+      {/* Avatar */}
+      <div className="mb-4">
+        {data.img ? (
           <img
-          src={data.img}
-          alt={data.name}
-            className="w-20 h-20 rounded-full ws-double-ring mx-auto mb-4 object-cover shadow-[0_12px_30px_rgba(26,29,41,0.06)]"
-        />
-      ) : (
-          <div className="w-20 h-20 rounded-full ws-double-ring ws-double-ring--on-dark mx-auto mb-4 flex items-center justify-center text-white text-xl font-semibold shadow-[0_12px_30px_rgba(26,29,41,0.06)]" style={{ backgroundColor: '#214B57' }}>
-          {data.name[0]}
-        </div>
-      )}
+            src={data.img}
+            alt={data.name}
+            className="w-16 h-16 rounded-full object-cover mx-auto border-2 border-white shadow-[0_4px_12px_rgba(0,0,0,0.1)]"
+          />
+        ) : (
+          <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center text-white text-lg font-semibold shadow-[0_4px_12px_rgba(0,0,0,0.1)] border-2 border-white" style={{ backgroundColor: '#214B57' }}>
+            {data.name[0]}
+          </div>
+        )}
+      </div>
 
-        <h4 className="text-[#1D1D1D] font-semibold mb-1 font-noto-serif" style={{ fontSize: 'clamp(1.125rem, 1.5vw, 1.25rem)', fontWeight: 500, lineHeight: '1.5', letterSpacing: '0px', fontFamily: 'Noto Serif, serif' }}>
+      {/* Name */}
+      <h4 className="text-[#1D1D1D] font-semibold mb-1.5 font-noto-serif" style={{ fontSize: 'clamp(1.125rem, 1.5vw, 1.25rem)', fontWeight: 600, lineHeight: '1.4', letterSpacing: '0px', fontFamily: 'Noto Serif, serif' }}>
         {data.name}
       </h4>
 
-        <p className="text-[#7F8C8D] text-sm mb-3 font-dm-sans">
+      {/* Location & Property */}
+      <p className="text-[#85929D] text-xs mb-4 font-dm-sans">
         {data.property} · {data.location}
       </p>
 
-        <div className="flex justify-center mb-4">
-          <Stars rating={data.rating} />
-        </div>
-
-        <p className="text-[#7F8C8D] mt-4 leading-relaxed text-base font-dm-sans" style={{ fontSize: 'clamp(1rem, 1.25vw, 1.125rem)', fontWeight: 400, lineHeight: '1.625', letterSpacing: '0px', fontFamily: 'DM Sans, sans-serif' }}>
-          &quot;{data.review}&quot;
-      </p>
+      {/* Stars */}
+      <div className="flex justify-center mb-4">
+        <Stars rating={data.rating} />
       </div>
+
+      {/* Review */}
+      <p className="text-[#4A4A4A] leading-relaxed font-dm-sans" style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1rem)', fontWeight: 400, lineHeight: '1.625', letterSpacing: '0px', fontFamily: 'DM Sans, sans-serif' }}>
+        &quot;{data.review}&quot;
+      </p>
     </div>
   );
 }
+
+export default TestimonialCard;
 
